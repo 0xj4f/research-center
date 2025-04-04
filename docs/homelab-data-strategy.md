@@ -254,3 +254,131 @@ exFAT **does not have journaling**, so if it’s unplugged while writing, you ri
 Want a ready-to-run `rsync` or `restic` script to back up your SQLite and LLM files safely to exFAT? Just say the word.
 
 
+# Advice
+
+Sure. Here's a clear and concise **homelab storage architecture proposal**, tailored to your setup and use case:
+
+---
+
+# **Homelab Storage Architecture Proposal**
+
+## **Objective**
+Design a reliable and efficient storage architecture for a homelab setup focused on daily web scraping and LLM summarization tasks, using:
+
+- **Mac Mini** (256GB internal SSD, ~100GB usable)
+- **256GB USB3 Flash Drive**
+- **5TB External HDD**
+
+The system must handle:
+- High I/O from daily scraping and LLM summarization
+- Long-term retention of raw and processed data
+- Portability and cross-platform access (macOS, Linux, Android TV)
+- Write endurance and data integrity
+
+---
+
+## **Storage Device Roles**
+
+### 1. **Internal SSD (256GB, ~100GB free)**
+**Purpose:** High-speed scratch space for active processing  
+**Use Cases:**
+- Temporary scraper outputs
+- LLM intermediate summaries
+- Python virtual environments and tooling
+- Daily working directories
+
+**Maintenance:**
+- Cleaned regularly (`/tmp` or `~/lab/tmp`)
+- Only used for short-lived, high-speed operations
+
+---
+
+### 2. **External HDD (5TB, ext4 or APFS)**
+**Purpose:** Primary persistent storage  
+**Use Cases:**
+- Archived raw scraped data (organized by timestamp)
+- LLM summarized results
+- Logs and metrics
+- Datasets for reprocessing or ML pipelines
+- SQLite databases and container volumes
+- Backups and snapshots
+
+**Mount Path:**
+```bash
+/Volumes/hdd_homelab/
+```
+
+**Directory Structure:**
+```bash
+/Volumes/hdd_homelab/
+├── raw_scrapes/
+├── llm_summaries/
+├── logs/
+├── datasets/
+├── sqlite/
+├── backups/
+```
+
+---
+
+### 3. **USB Flash Drive (256GB, exFAT)**
+**Purpose:** Portable, read-only static storage  
+**Use Cases:**
+- Wordlists
+- Static datasets
+- Scripts, binaries, documentation
+- Cross-platform access (macOS, Linux, Android TV)
+
+**Mount Path:**
+```bash
+/Volumes/tools_usb/
+```
+
+---
+
+## **Data Flow and Automation**
+
+### Daily Pipeline:
+
+1. **Scraper Execution**  
+   - Write outputs to: `/Users/username/lab/tmp/scrapes/`
+
+2. **LLM Summarization**  
+   - Read from scraper output  
+   - Write results to: `/Users/username/lab/tmp/llm/`
+
+3. **Storage Sync to HDD**  
+   - Daily `rsync` via cron or launchd:
+     ```bash
+     rsync -avh --remove-source-files ~/lab/tmp/scrapes/ /Volumes/hdd_homelab/raw_scrapes/
+     rsync -avh --remove-source-files ~/lab/tmp/llm/ /Volumes/hdd_homelab/llm_summaries/
+     ```
+
+4. **Clean Temp Space**  
+   - Daily or post-task cleanup:
+     ```bash
+     rm -rf ~/lab/tmp/*
+     ```
+
+---
+
+## **Benefits**
+
+- Maximizes performance by isolating write-heavy tasks to internal SSD
+- Preserves SSD lifespan with regular offloading to HDD
+- Prevents flash drive wear-out by using it only for read-heavy, portable tasks
+- Enables cross-platform access to static resources via exFAT
+- Simple, cron-based sync architecture avoids corruption and temp file issues
+
+---
+
+## **Conclusion**
+
+This architecture separates concerns between processing, storage, and portability, aligned with best practices for system durability and data safety. It is optimized for performance, maintenance simplicity, and long-term homelab growth.
+
+--- 
+
+Let me know if you want it in Markdown, PDF, or a formal doc format.
+
+
+
