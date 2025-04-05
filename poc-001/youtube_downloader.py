@@ -1,73 +1,73 @@
-# import os
-# import sys
-# import pytube
+import os
+import sys
+import pytube
 
-# """
-# pip install pytube
-# """
+"""
+pip install pytube
+"""
 
-# def download_video(video_url):
-#     try:
-#         # Define output directory
-#         output_dir = "./youtube-videos"
-#         os.makedirs(output_dir, exist_ok=True)
+def download_video(video_url):
+    try:
+        # Define output directory
+        output_dir = "./youtube-videos"
+        os.makedirs(output_dir, exist_ok=True)
 
-#         youtube = pytube.YouTube(video_url)
-#         video_stream = youtube.streams.get_highest_resolution()
-#         downloaded_path = video_stream.download(output_path=output_dir)
+        youtube = pytube.YouTube(video_url)
+        video_stream = youtube.streams.get_highest_resolution()
+        downloaded_path = video_stream.download(output_path=output_dir)
 
-#         # Rename file to replace spaces with dashes
-#         original_filename = os.path.basename(downloaded_path)
-#         new_filename = original_filename.replace(" ", "-")
-#         new_filepath = os.path.join(output_dir, new_filename)
+        # Rename file to replace spaces with dashes
+        original_filename = os.path.basename(downloaded_path)
+        new_filename = original_filename.replace(" ", "-")
+        new_filepath = os.path.join(output_dir, new_filename)
 
-#         os.rename(downloaded_path, new_filepath)
+        os.rename(downloaded_path, new_filepath)
 
-#         print(f"Downloading {original_filename}")
-#         print("Video downloaded successfully.")
-#     except Exception as e:
-#         print("An error occurred while downloading the video:", str(e))
+        print(f"Downloading {original_filename}")
+        print("Video downloaded successfully.")
+    except Exception as e:
+        print("An error occurred while downloading the video:", str(e))
 
-# if __name__ == "__main__":
-#     video_url = sys.argv[1] if len(sys.argv) > 1 else None
+if __name__ == "__main__":
+    video_url = sys.argv[1] if len(sys.argv) > 1 else None
 
-#     if video_url:
-#         download_video(video_url)
-#     else:
-#         print("Please provide a valid video URL as a command line argument.")
+    if video_url:
+        download_video(video_url)
+    else:
+        print("Please provide a valid video URL as a command line argument.")
 
-# import os
-# import sys
-# from pytube import YouTube
+import os
+import sys
+from pytube import YouTube
 
-# def download_video(video_url):
-#     try:
-#         youtube = YouTube(video_url)
-#         video_stream = youtube.streams.get_highest_resolution()
-#         original_filename = video_stream.default_filename
+def download_video(video_url):
+    try:
+        youtube = YouTube(video_url)
+        video_stream = youtube.streams.get_highest_resolution()
+        original_filename = video_stream.default_filename
 
-#         print(f"Downloading: {original_filename}")
-#         video_stream.download()
+        print(f"Downloading: {original_filename}")
+        video_stream.download()
 
-#         safe_filename = original_filename.replace(" ", "-")
-#         if original_filename != safe_filename:
-#             os.rename(original_filename, safe_filename)
-#             print(f"Renamed to: {safe_filename}")
-#         else:
-#             print("Filename is already safe.")
+        safe_filename = original_filename.replace(" ", "-")
+        if original_filename != safe_filename:
+            os.rename(original_filename, safe_filename)
+            print(f"Renamed to: {safe_filename}")
+        else:
+            print("Filename is already safe.")
 
-#         print("Video downloaded successfully.")
+        print("Video downloaded successfully.")
 
-#     except Exception as e:
-#         print("An error occurred while downloading the video:", str(e))
+    except Exception as e:
+        print("An error occurred while downloading the video:", str(e))
 
-# if __name__ == "__main__":
-#     video_url = sys.argv[1] if len(sys.argv) > 1 else None
+if __name__ == "__main__":
+    video_url = sys.argv[1] if len(sys.argv) > 1 else None
 
-#     if video_url:
-#         download_video(video_url)
-#     else:
-#         print("Please provide a valid video URL as a command line argument.")
+    if video_url:
+        download_video(video_url)
+    else:
+        print("Please provide a valid video URL as a command line argument.")
 
 
 import sys
