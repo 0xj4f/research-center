@@ -78,6 +78,4 @@ then we need to a function or component called safety_rails
 - function that checks the limit of youtube downloads, the default size of acceptable file limit is 40GB.
 - if it we're to exceed we need to exit the program, this should be a guard rail. append as the first step of the url loops. so we can check if we can download the next file.
     - then exit the program and create an error message and file to note where we stop, so we can continue after manual intervention
-    
-
-if not
+- next a validator logic that will check if the youtube url is already there, if found there add warning message then skip to the next item.
