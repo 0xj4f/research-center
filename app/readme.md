@@ -63,3 +63,21 @@ ID    YOUTUBE_URL                    TITLE                     AUTHOR           
 
 [DONE]
 ```
+
+## TO DO NEXT 
+
+IMPORTANT 
+- Check file size of ~/youtube-downloads
+```
+╰─$ du -sh *
+252M    20250407
+ 12K    metadata.sqlite
+```
+
+then we need to a function or component called safety_rails
+- function that checks the limit of youtube downloads, the default size of acceptable file limit is 40GB.
+- if it we're to exceed we need to exit the program, this should be a guard rail. append as the first step of the url loops. so we can check if we can download the next file.
+    - then exit the program and create an error message and file to note where we stop, so we can continue after manual intervention
+    
+
+if not
