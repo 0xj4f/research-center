@@ -6,7 +6,6 @@ import datetime
 import re
 from urllib.parse import urlparse, parse_qs
 
-# Our modules
 from components.video_downloader import download_video
 from components.transcript_downloader import (
     fetch_video_metadata, download_transcript, save_transcript
@@ -44,7 +43,7 @@ def main():
         with open(args.file, 'r', encoding='utf-8') as f:
             youtube_urls = [line.strip() for line in f if line.strip()]
     else:
-        print("Please provide --url or --file.")
+        print("Please provide --url <URL> or --file <FILE>")
         sys.exit(1)
 
     # Start or open the DB
@@ -63,12 +62,15 @@ def main():
         print(f"\n[INFO] Processing: {url}")
         vid_id = get_video_id(url)
         if not vid_id:
-            print(f"[ERROR] Could not parse video ID. Skipping.")
+            print(f"[ERROR] Could not parse video ID from {url}. Skipping.")
             continue
 
         meta = fetch_video_metadata(vid_id)
-        title = sanitize_string(meta['title'])
-        author = sanitize_string(meta['author'])
+        raw_title = meta['title']
+        raw_author = meta['author']
+
+        title = sanitize_string(raw_title)
+        author = sanitize_string(raw_author)
         base_name = f"{title}-{author}"
 
         # Download transcript
@@ -93,7 +95,8 @@ def main():
         row_id = insert_metadata(
             conn,
             youtube_url=url,
-            video_title=f"{title}-{author}",
+            video_title=raw_title,
+            author=raw_author,
             video_path=video_path if video_path else "",
             transcript_path=transcript_path if transcript_path else "",
             date_downloaded=date_downloaded
@@ -105,15 +108,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
-"""
-VERSION 3
-╰─$ python3 app/main.py --url https://www.youtube.com/watch\?v\=Qm7k1CPFkIc
-
-[INFO] Processing: https://www.youtube.com/watch?v=Qm7k1CPFkIc
-[+] Transcript saved to /Users/tasteless/youtube-downloads/20250407/How_to_Get_Someones_Password-Jack_Rhysider.txt
-[+] Video downloaded: /Users/tasteless/youtube-downloads/20250407/How_to_Get_Someones_Password-Jack_Rhysider.mp4
-[DB] Inserted row id=1
-
-[DONE] All tasks completed.
-"""

@@ -9,13 +9,13 @@
 
 [DONE] All tasks completed.
 
-╰─$ python3 app/tools/youtube-metadata.py                                  
+╰─$ python3 app/tools/youtube-metadata.py
 [INFO] Found 1 total entries in 'downloads' table.
 
 === Download Entries ===
-ID    YOUTUBE_URL                    TITLE                          VIDEO_PATH                     TRANSCRIPT_PATH                DATE_DOWN            LLM1
-------------------------------------------------------------------------------------------------------------------------------------------------------
-1     https://www.youtube.com/watc.. How_to_Get_Someones_Password.. /Users/tasteless/youtube-dow.. /Users/tasteless/youtube-dow.. 2025-04-07 15:00:36  N
+ID    YOUTUBE_URL                    TITLE                     AUTHOR               VIDEO_PATH                     TRANSCRIPT_PATH                DATE_DOWN            LLM1
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+1     https://www.youtube.com/watc.. How to Get Someone's Pa.. Jack Rhysider        /Users/tasteless/youtube-dow.. /Users/tasteless/youtube-dow.. 2025-04-07 15:16:34  N
 
 [DONE]
 ```

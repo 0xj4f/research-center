@@ -5,13 +5,10 @@ import sqlite3
 
 def get_db_path():
     """
-    Return the path for metadata.sqlite, defaulting to ~/youtube-downloads/metadata.sqlite.
+    Return the path for metadata.sqlite, defaulting to ~/youtube-downloads/metadata.sqlite
     """
-    root = os.environ.get("YOUTUBE_OUTPUTS_PATH", "")
-    if not root:
-        home = os.path.expanduser("~")
-        root = os.path.join(home, "youtube-downloads")
-    # Ensure the directory exists
+    home = os.path.expanduser("~")
+    root = os.path.join(home, "youtube-downloads")
     os.makedirs(root, exist_ok=True)
     return os.path.join(root, "metadata.sqlite")
 
@@ -27,6 +24,7 @@ def init_db():
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         youtube_url TEXT NOT NULL,
         video_title TEXT,
+        author TEXT,
         video_path TEXT,
         transcript_path TEXT,
         date_downloaded TEXT,
@@ -36,17 +34,16 @@ def init_db():
     conn.commit()
     return conn
 
-def insert_metadata(conn, youtube_url, video_title, video_path, transcript_path, date_downloaded):
+def insert_metadata(conn, youtube_url, video_title, author, video_path, transcript_path, date_downloaded):
     """
     Insert a new row into downloads table.
     Return the row id.
     """
     c = conn.cursor()
     c.execute("""
-    INSERT INTO downloads (youtube_url, video_title, video_path, transcript_path, date_downloaded)
-    VALUES (?, ?, ?, ?, ?)
-    """, (youtube_url, video_title, video_path, transcript_path, date_downloaded))
+    INSERT INTO downloads 
+    (youtube_url, video_title, author, video_path, transcript_path, date_downloaded)
+    VALUES (?, ?, ?, ?, ?, ?)
+    """, (youtube_url, video_title, author, video_path, transcript_path, date_downloaded))
     conn.commit()
     return c.lastrowid
-
-# add or modify columns as needed (like “author”, “upload_date”, or “notes”)
