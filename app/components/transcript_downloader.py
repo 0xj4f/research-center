@@ -1,73 +1,59 @@
-# components/transcript_downloader.py
 from youtube_transcript_api import YouTubeTranscriptApi
 from youtube_transcript_api._errors import TranscriptsDisabled, NoTranscriptFound
 import requests
 import os
-import re
-
-def download_transcript(video_id):
-    """
-    Attempt to download the English transcript by video_id.
-    Return the transcript text or None if not found/disabled.
-    """
-    try:
-        transcript_list = YouTubeTranscriptApi.get_transcript(video_id, languages=['en'])
-        transcript = ' '.join([seg['text'] for seg in transcript_list])
-        return transcript
-    except TranscriptsDisabled:
-        print(f"Transcripts disabled for video ID: {video_id}")
-    except NoTranscriptFound:
-        print(f"No transcript found for video ID: {video_id}")
-    except Exception as e:
-        print(f"Error: {e}")
-    return None
 
 def fetch_video_metadata(video_id):
     """
-    Uses oEmbed to fetch basic metadata (title, author).
-    No guaranteed date from oEmbed, so returns 'Unknown Date'.
+    Use oEmbed to fetch basic video metadata (title, author).
+    Return dict {'title': ..., 'author': ...}. 
     """
     url = f"https://www.youtube.com/oembed?url=http://www.youtube.com/watch?v={video_id}&format=json"
     try:
-        response = requests.get(url)
-        if response.status_code == 200:
-            data = response.json()
-            title = data.get('title', 'UnknownTitle')
-            author = data.get('author_name', 'UnknownAuthor')
-            upload_date = 'UnknownDate'  # not provided by oembed
-            return {
-                "title": title,
-                "author": author,
-                "upload_date": upload_date
-            }
+        r = requests.get(url)
+        if r.status_code == 200:
+            data = r.json()
+            title = data.get('title', 'Unknown_Title')
+            author = data.get('author_name', 'Unknown_Author')
+            return {"title": title, "author": author}
         else:
-            print(f"Error fetching metadata for {video_id}: {response.status_code}")
+            print(f"[!] Error fetching metadata for {video_id}, status: {r.status_code}")
     except Exception as e:
-        print(f"Error fetching metadata: {e}")
+        print(f"[!] Exception fetching metadata: {e}")
 
-    return {
-        "title": "UnknownTitle",
-        "author": "UnknownAuthor",
-        "upload_date": "UnknownDate"
-    }
+    return {"title": "Unknown_Title", "author": "Unknown_Author"}
 
-def save_transcript(transcript, metadata, output_dir):
+def download_transcript(video_id):
     """
-    Save transcript to a .txt file in 'output_dir', 
-    naming by sanitized title-author.
+    Attempt to fetch the English transcript from youtube_transcript_api.
+    Return the combined text or None if not available.
+    """
+    try:
+        transcript_data = YouTubeTranscriptApi.get_transcript(video_id, languages=['en'])
+        transcript_text = ' '.join(segment['text'] for segment in transcript_data)
+        return transcript_text
+    except TranscriptsDisabled:
+        print(f"[!] Transcripts disabled for {video_id}")
+    except NoTranscriptFound:
+        print(f"[!] No transcript found for {video_id}")
+    except Exception as e:
+        print(f"[!] Error retrieving transcript for {video_id}: {e}")
+    return None
+
+def save_transcript(transcript, output_dir, base_filename):
+    """
+    Save the transcript as {base_filename}.txt in output_dir.
     """
     if not transcript:
-        return
+        return None
 
     os.makedirs(output_dir, exist_ok=True)
-
-    title = metadata['title'].replace(" ", "_")
-    author = metadata['author'].replace(" ", "_")
-    # We'll skip upload_date since it's "UnknownDate" anyway from oembed
-
-    filename = f"{title}-{author}.txt"
-    filepath = os.path.join(output_dir, filename)
-    with open(filepath, 'w', encoding='utf-8') as f:
-        f.write(transcript)
-
-    print(f"Transcript saved to: {filepath}")
+    txt_path = os.path.join(output_dir, f"{base_filename}.txt")
+    try:
+        with open(txt_path, 'w', encoding='utf-8') as f:
+            f.write(transcript)
+        print(f"[+] Transcript saved to {txt_path}")
+        return txt_path
+    except Exception as e:
+        print(f"[!] Error saving transcript: {e}")
+        return None
