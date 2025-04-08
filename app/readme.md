@@ -102,6 +102,26 @@ Validation if url is already existing
 [✓] All channels processed.
 ```
 
+json structure 
+```json 
+{
+    "channel_name": "JackRhysider",
+    "channel_url": "https://www.youtube.com/@JackRhysider/videos",
+    "videos": [
+        {
+            "title": "Secrets of Defcon: Untold Stories From the World's Greatest Hacker Conference \ud83d\udcbe Ep.157: Grifter",
+            "url": "https://www.youtube.com/watch?v=RyLlzHvXIDQ",
+            "published": "Unknown Date"
+        },
+        {
+            "title": "There's No Way This \"Hitman for Hire\" Website Is Real...Right?\ud83d\udc80Darknet Diaries Ep. 156: Kill List",
+            "url": "https://www.youtube.com/watch?v=f2YONut4F6Q",
+            "published": "Unknown Date"
+        },
+    ]
+}
+```
+
 
 
 ## TO DO NEXT 
