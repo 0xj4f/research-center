@@ -10,7 +10,8 @@ from components.video_downloader import download_video
 from components.transcript_downloader import (
     fetch_video_metadata, download_transcript, save_transcript
 )
-from components.store_metadata import init_db, insert_metadata
+# from components.store_metadata import init_db, insert_metadata
+from components.sqlite_interface import init_db, insert_metadata, youtube_url_exists
 
 def parse_args():
     parser = argparse.ArgumentParser(description="Download YouTube videos & transcripts with consistent naming, store metadata.")
@@ -60,10 +61,16 @@ def main():
 
     for url in youtube_urls:
         print(f"\n[INFO] Processing: {url}")
+
         vid_id = get_video_id(url)
         if not vid_id:
             print(f"[ERROR] Could not parse video ID from {url}. Skipping.")
             continue
+
+        if youtube_url_exists(url):
+            print(f"[SKIP] URL already exists in DB: {url}")
+            continue
+
 
         meta = fetch_video_metadata(vid_id)
         raw_title = meta['title']

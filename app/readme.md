@@ -64,6 +64,27 @@ ID    YOUTUBE_URL                    TITLE                     AUTHOR           
 [DONE]
 ```
 
+Validation if url is already existing
+```
+╰─$ python3 app/main.py --file list.txt  
+
+[INFO] Processing: https://www.youtube.com/watch?v=JsVtHqICeKE
+[SKIP] URL already exists in DB: https://www.youtube.com/watch?v=JsVtHqICeKE
+
+[INFO] Processing: https://www.youtube.com/watch?v=H9yQpsreMVI
+[SKIP] URL already exists in DB: https://www.youtube.com/watch?v=H9yQpsreMVI
+
+[INFO] Processing: https://www.youtube.com/watch?v=4qvNRfExoEM
+[+] Transcript saved to /Users/tasteless/youtube-downloads/20250408/Symlinks_The_Mortal_Enemy_of_CTF_Creators-Tib3rius.txt
+[+] Video downloaded: /Users/tasteless/youtube-downloads/20250408/Symlinks_The_Mortal_Enemy_of_CTF_Creators-Tib3rius.mp4
+[DB] Inserted row id=4
+
+[DONE] All tasks completed.
+```
+
+
+
+
 ## TO DO NEXT 
 
 IMPORTANT 
