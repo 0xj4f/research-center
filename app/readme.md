@@ -82,6 +82,25 @@ Validation if url is already existing
 [DONE] All tasks completed.
 ```
 
+## youtube channel crawler
+> app/tools/youtube_channel_crawler.py
+```
+╰─$ python3 app/tools/youtube_channel_crawler.py                                                                                                                                                                         1 ↵
+[INFO] Crawling: https://www.youtube.com/@JackRhysider/videos
+[+] Saved 183 videos to /Users/tasteless/youtube-downloads/watchlist/JackRhysider.json
+[INFO] Crawling: https://www.youtube.com/@DEFCONConference/videos
+[+] Saved 1000 videos to /Users/tasteless/youtube-downloads/watchlist/DEFCONConference.json
+[INFO] Crawling: https://www.youtube.com/@Tib3rius/videos
+[+] Saved 179 videos to /Users/tasteless/youtube-downloads/watchlist/Tib3rius.json
+[INFO] Crawling: https://www.youtube.com/@LiveOverflow/videos
+[+] Saved 409 videos to /Users/tasteless/youtube-downloads/watchlist/LiveOverflow.json
+[INFO] Crawling: https://www.youtube.com/@LowLevelTV/videos
+[+] Saved 199 videos to /Users/tasteless/youtube-downloads/watchlist/LowLevelTV.json
+[INFO] Crawling: https://www.youtube.com/@NahamSec/videos
+[+] Saved 350 videos to /Users/tasteless/youtube-downloads/watchlist/NahamSec.json
+
+[✓] All channels processed.
+```
 
 
 
