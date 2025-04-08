@@ -122,6 +122,11 @@ json structure
 }
 ```
 
+To save urls as lists
+```bash
+jq -r '.videos[].url' JackRhysider.json > 01.txt
+```
+
 
 
 ## TO DO NEXT 
