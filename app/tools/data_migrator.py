@@ -78,10 +78,13 @@ def migrate_folders(dry_run=False):
 
             print(f"[INFO] Migrating: {file_path.name}")
             try:
+                file_size = file_path.stat().st_size  # <- moved here before rsync deletes the file
+                file_type = "video" if file_path.suffix == ".mp4" else "transcript"
+
                 dest_path = rsync_file(file_path, DEST_DIR, dry_run=dry_run)
+
                 if not dry_run:
-                    file_type = "video" if file_path.suffix == ".mp4" else "transcript"
-                    log_file_migration(file_path, dest_path, file_path.name, file_path.stat().st_size, file_type, conn)
+                    log_file_migration(file_path, dest_path, file_path.name, file_size, file_type, conn)
             except subprocess.CalledProcessError as e:
                 print(f"[ERROR] Failed to migrate {file_path.name}: {e}")
 
