@@ -128,6 +128,71 @@ jq -r '.videos[].url' JackRhysider.json > 01.txt
 ```
 
 
+## Data Migration
+YouTube Data Migrator
+This script safely moves downloaded YouTube videos and transcripts from your Mac to an external hard drive using rsync, with file-level logging into a local SQLite database to prevent duplication and enable audit trails.
+
+Features
+- Moves .mp4 and .txt files from ~/youtube-downloads/YYYYMMDD/ to /Volumes/2025-J4F-01/scraped_data/youtube-downloads/
+- Preserves metadata by syncing metadata.sqlite (copied, not deleted)
+- Prevents data corruption using rsync --remove-source-files
+- Tracks every file migrated using migration_tracker.sqlite
+- Supports --dry-run mode to preview the migration
+
+|                        Folder                        |                       Purpose                      |
+|:----------------------------------------------------:|:--------------------------------------------------:|
+| ~/youtube-downloads/YYYYMMDD/                        | Daily scraped videos & transcripts                 |
+| ~/youtube-downloads/metadata.sqlite                  | Tracks YouTube metadata                            |
+| /Volumes/2025-J4F-01/scraped_data/youtube-downloads/ | Long-term archive                                  |
+| ~/youtube-downloads/migration_tracker.sqlite         | Internal migration log                             |
+
+
+```bash
+# safe  preview
+python3 data_migrator.py --dry-run
+
+╰─$ python3 app/tools/data_migrator.py
+sent 84.77M bytes  received 42 bytes  56.51M bytes/sec
+total size is 84.76M  speedup is 1.00
+[INFO] Migrating: Ep_4_Panic_at_the_TalkTalk_Board_Room-Jack_Rhysider.txt
+building file list ... done
+Ep_4_Panic_at_the_TalkTalk_Board_Room-Jack_Rhysider.txt
+
+sent 41.45K bytes  received 42 bytes  82.99K bytes/sec
+total size is 41.27K  speedup is 0.99
+[INFO] Migrating: When_She_Cant_Hack_the_Lock_She_Hacks_the_Security_Guard_Darknet_Diaries_Ep_90_Jenny-Jack_Rhysider.mp4
+building file list ... done
+When_She_Cant_Hack_the_Lock_She_Hacks_the_Security_Guard_Darknet_Diaries_Ep_90_Jenny-Jack_Rhysider.mp4
+
+sent 112.10M bytes  received 42 bytes  44.84M bytes/sec
+total size is 112.09M  speedup is 1.00
+[INFO] Migrating: XBee_Basics_Lesson_3_API_Mode_Digital_Input_from_Remote_Sensor-Jack_Rhysider.txt
+building file list ... done
+XBee_Basics_Lesson_3_API_Mode_Digital_Input_from_Remote_Sensor-Jack_Rhysider.txt
+
+sent 10.24K bytes  received 42 bytes  20.56K bytes/sec
+total size is 10.04K  speedup is 0.98
+[INFO] Migrating: A_Clipboard_is_All_You_Need_to_Break_Into_a_Building_Darknet_Diaries_Ep_22_Mini_Stories_Vol_1-Jack_Rhysider.mp4
+building file list ... done
+A_Clipboard_is_All_You_Need_to_Break_Into_a_Building_Darknet_Diaries_Ep_22_Mini_Stories_Vol_1-Jack_Rhysider.mp4
+
+sent 64.62M bytes  received 42 bytes  129.25M bytes/sec
+total size is 64.61M  speedup is 1.00
+[INFO] Migrating: Why_Governments_Love_to_Buy_the_Bugs_in_Your_Favorite_Apps_Darknet_Diaries_Ep_98_Zero_Day_Brokers-Jack_Rhysider.mp4
+building file list ... done
+Why_Governments_Love_to_Buy_the_Bugs_in_Your_Favorite_Apps_Darknet_Diaries_Ep_98_Zero_Day_Brokers-Jack_Rhysider.mp4
+
+sent 138.60M bytes  received 42 bytes  55.44M bytes/sec
+total size is 138.58M  speedup is 1.00
+[SYNC] Copying metadata.sqlite to HDD (overwrite allowed).
+building file list ... done
+metadata.sqlite
+
+sent 77.97K bytes  received 42 bytes  156.02K bytes/sec
+total size is 77.82K  speedup is 1.00
+[DONE] Migration process completed.
+```
+
 
 ## TO DO NEXT 
 
