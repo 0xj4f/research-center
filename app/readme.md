@@ -208,4 +208,61 @@ then we need to a function or component called safety_rails
 - function that checks the limit of youtube downloads, the default size of acceptable file limit is 40GB.
 - if it we're to exceed we need to exit the program, this should be a guard rail. append as the first step of the url loops. so we can check if we can download the next file.
     - then exit the program and create an error message and file to note where we stop, so we can continue after manual intervention
-- next a validator logic that will check if the youtube url is already there, if found there add warning message then skip to the next item.
+
+
+## OPERATIONS
+
+
+```bash
+
+# create youtube-channels.txt 
+https://www.youtube.com/@JackRhysider/videos
+https://www.youtube.com/@DEFCONConference/videos
+https://www.youtube.com/@Tib3rius/videos
+https://www.youtube.com/@LiveOverflow/videos
+https://www.youtube.com/@LowLevelTV/videos
+https://www.youtube.com/@NahamSec/videos
+https://www.youtube.com/@HackersOnBoard/videos
+
+
+# Crawl and get all youtube urls and metadata
+python3 app/tools/youtube_channel_crawler.py                                                                                                                                                                         1 ↵
+[INFO] Crawling: https://www.youtube.com/@JackRhysider/videos
+[+] Saved 183 videos to /Users/tasteless/youtube-downloads/watchlist/JackRhysider.json
+[INFO] Crawling: https://www.youtube.com/@DEFCONConference/videos
+[+] Saved 1000 videos to /Users/tasteless/youtube-downloads/watchlist/DEFCONConference.json
+[INFO] Crawling: https://www.youtube.com/@Tib3rius/videos
+[+] Saved 179 videos to /Users/tasteless/youtube-downloads/watchlist/Tib3rius.json
+...
+
+# Save urls 
+jq -r '.videos[].url' JackRhysider.json > 01.txt
+
+# then this will scrape the video and transcript of the urls
+python3 app/main.py --file 01.txt
+[INFO] Processing: https://www.youtube.com/watch?v=oUI38IEqimM
+[+] Transcript saved to /Users/tasteless/youtube-downloads/20250410/This_Hacker_Scored_5_000_with_a_Remote_Code_Execution_Exploit-NahamSec.txt
+[+] Video downloaded: /Users/tasteless/youtube-downloads/20250410/This_Hacker_Scored_5_000_with_a_Remote_Code_Execution_Exploit-NahamSec.mp4
+[DB] Inserted row id=365
+
+
+# then we migrate them at the end of the day
+python3 app/tools/data_migrator.py
+sent 66.53K bytes  received 42 bytes  133.14K bytes/sec
+total size is 66.33K  speedup is 1.00
+[INFO] Migrating: Have_You_Learned_Your_Lesson_Solving_My_TryHackMe_Room-Tib3rius.txt
+building file list ... done
+Have_You_Learned_Your_Lesson_Solving_My_TryHackMe_Room-Tib3rius.txt
+
+sent 16.28K bytes  received 42 bytes  32.65K bytes/sec
+total size is 16.10K  speedup is 0.99
+[SYNC] Copying metadata.sqlite to HDD (overwrite allowed).
+building file list ... done
+metadata.sqlite
+
+sent 143.51K bytes  received 42 bytes  287.11K bytes/sec
+total size is 143.36K  speedup is 1.00
+[DONE] Migration process completed.
+```
+
+
