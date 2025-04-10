@@ -26,3 +26,12 @@
 - For better longevity → choose model with better cooling and reviews.
 
 Let me know if you want a recommendation script to compare models.
+
+
+
+
+# TARGET GPU
+RTX 4060 
+
+https://shopee.ph/Gigabyte-NVIDIA%C2%AE-GeForce-RTX%E2%84%A24060-GV-N4060GAMING-OC-8GD-Gaming-OC-8GB-GDDR6-128-bit-DP*2-HDMI*2-i.225359055.22372245832?sp_atk=e3eff5f1-d8f3-4312-af05-efad4d5b3ffb&xptdk=e3eff5f1-d8f3-4312-af05-efad4d5b3ffb
+https://shopee.ph/mall/search?keyword=4060&shop=225359055
