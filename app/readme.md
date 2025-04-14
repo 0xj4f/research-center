@@ -346,4 +346,39 @@ ERROR: [youtube] 8YkMu32Hcho: This video is available to this channel's members 
 [!] Error downloading video https://www.youtube.com/watch?v=8YkMu32Hcho: ERROR: [youtube] 8YkMu32Hcho: This video is available to this channel's members on level: Nahomies (or any higher level). Join this channel to get access to members-only content and other exclusive perks.
 [!] Video not saved properly or error.
 [DB] Inserted row id=534
+
+
+[INFO] Processing: https://www.youtube.com/watch?v=EDwHvZ6ujho
+[+] Transcript saved to /Users/tasteless/youtube-downloads/20250414/HackTheBox_WifineticTwo-IppSec.txt
+[download] 100.0% of   40.57MiB at    1.57MiB/s ETA 00:00ERROR: Unable to rename file: [Errno 2] No such file or directory: '/Users/tasteless/youtube-downloads/20250414/HackTheBox - WifineticTwo.mp4.part' -> '/Users/tasteless/youtube-downloads/20250414/HackTheBox - WifineticTwo.mp4'
+[!] Error downloading video https://www.youtube.com/watch?v=EDwHvZ6ujho: ERROR: Unable to rename file: [Errno 2] No such file or directory: '/Users/tasteless/youtube-downloads/20250414/HackTheBox - WifineticTwo.mp4.part' -> '/Users/tasteless/youtube-downloads/20250414/HackTheBox - WifineticTwo.mp4'
+[!] Video not saved properly or error.
+[DB] Inserted row id=761
+
+
+
+[INFO] Processing: https://www.youtube.com/watch?v=EDwHvZ6ujho
+[+] Transcript saved to /Users/tasteless/youtube-downloads/20250414/HackTheBox_WifineticTwo-IppSec.txt
+[download] 100.0% of   40.57MiB at    1.57MiB/s ETA 00:00ERROR: Unable to rename file: [Errno 2] No such file or directory: '/Users/tasteless/youtube-downloads/20250414/HackTheBox - WifineticTwo.mp4.part' -> '/Users/tasteless/youtube-downloads/20250414/HackTheBox - WifineticTwo.mp4'
+[!] Error downloading video https://www.youtube.com/watch?v=EDwHvZ6ujho: ERROR: Unable to rename file: [Errno 2] No such file or directory: '/Users/tasteless/youtube-downloads/20250414/HackTheBox - WifineticTwo.mp4.part' -> '/Users/tasteless/youtube-downloads/20250414/HackTheBox - WifineticTwo.mp4'
+[!] Video not saved properly or error.
+[DB] Inserted row id=761
+
+[INFO] Processing: https://www.youtube.com/watch?v=FDCpJbS1OuQ
+[+] Transcript saved to /Users/tasteless/youtube-downloads/20250414/HackTheBox_Headless-IppSec.txt
+[download] 100.0% of   57.39MiB at    3.07MiB/s ETA 00:00ERROR: Unable to rename file: [Errno 2] No such file or directory: '/Users/tasteless/youtube-downloads/20250414/HackTheBox - Headless.mp4.part' -> '/Users/tasteless/youtube-downloads/20250414/HackTheBox - Headless.mp4'
+[!] Error downloading video https://www.youtube.com/watch?v=FDCpJbS1OuQ: ERROR: Unable to rename file: [Errno 2] No such file or directory: '/Users/tasteless/youtube-downloads/20250414/HackTheBox - Headless.mp4.part' -> '/Users/tasteless/youtube-downloads/20250414/HackTheBox - Headless.mp4'
+[!] Video not saved properly or error.
+[DB] Inserted row id=763
+
+
+[INFO] Processing: https://www.youtube.com/watch?v=R7mkgYcFcZ0
+[+] Transcript saved to /Users/tasteless/youtube-downloads/20250414/HackTheBox_Corporate_FIXED-IppSec.txt
+[download] 100.0% of  199.60MiB at   24.58MiB/s ETA 00:00ERROR: Unable to rename file: [Errno 2] No such file or directory: '/Users/tasteless/youtube-downloads/20250414/HackTheBox - Corporate (FIXED).mp4.part' -> '/Users/tasteless/youtube-downloads/20250414/HackTheBox - Corporate (FIXED).mp4'
+[!] Error downloading video https://www.youtube.com/watch?v=R7mkgYcFcZ0: ERROR: Unable to rename file: [Errno 2] No such file or directory: '/Users/tasteless/youtube-downloads/20250414/HackTheBox - Corporate (FIXED).mp4.part' -> '/Users/tasteless/youtube-downloads/20250414/HackTheBox - Corporate (FIXED).mp4'
+[!] Video not saved properly or error.
+[DB] Inserted row id=766
 ```
+
+
+
