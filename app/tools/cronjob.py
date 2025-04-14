@@ -8,7 +8,7 @@ from pathlib import Path
 SOURCE_DIR = Path.home() / "youtube-downloads"
 SIZE_LIMIT_GB = 30
 MIGRATOR_SCRIPT = Path(__file__).parent / "data_migrator.py"
-LOG_FILE = SOURCE_DIR / "migration_watch.log"
+LOG_FILE = SOURCE_DIR / "cronjob_migration.log"
 
 def get_folder_size_gb(path: Path) -> float:
     """Returns the size of a folder in gigabytes."""
@@ -25,12 +25,13 @@ def get_folder_size_gb(path: Path) -> float:
 def main():
     current_size = get_folder_size_gb(SOURCE_DIR)
     now = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    readable_path = str(SOURCE_DIR)
 
     if current_size >= SIZE_LIMIT_GB:
-        log_msg = f"[{now}] Triggering migration. Folder size: {current_size:.2f} GB"
+        log_msg = f"[{now}] Triggering migration. Folder '{readable_path}' size: {current_size:.2f} GB"
         subprocess.run(["python3", str(MIGRATOR_SCRIPT)], check=True)
     else:
-        log_msg = f"[{now}] No action. Current folder size: {current_size:.2f} GB"
+        log_msg = f"[{now}] No action. Folder '{readable_path}' size: {current_size:.2f} GB"
 
     with open(LOG_FILE, "a") as f:
         f.write(log_msg + "\n")
