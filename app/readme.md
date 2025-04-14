@@ -266,3 +266,84 @@ total size is 143.36K  speedup is 1.00
 ```
 
 
+
+
+
+
+
+
+# ERROR TRACKING 
+
+we need to track this error, or running the scripts that will validate if the sqlite is really accurate
+```
+[INFO] Processing: https://www.youtube.com/watch?v=G1RHa7l1Ys4
+[+] Transcript saved to /Users/tasteless/youtube-downloads/20250410/NahamCon2023_Bugs_Exposed_Unveiling_Effective_Strategies_for_Bug_Bounty_Programs_ArchAngelDDay-NahamSec.txt
+ERROR: unable to download video data: HTTP Error 403: Forbidden
+[!] Error downloading video https://www.youtube.com/watch?v=G1RHa7l1Ys4: ERROR: unable to download video data: HTTP Error 403: Forbidden
+[!] Video not saved properly or error.
+[DB] Inserted row id=472
+
+nserted row id=528
+
+[INFO] Processing: https://www.youtube.com/watch?v=pvL3rvbuLkc
+[!] Error retrieving transcript for pvL3rvbuLkc: 
+Could not retrieve a transcript for the video https://www.youtube.com/watch?v=pvL3rvbuLkc! This is most likely caused by:
+
+The video is unplayable for the following reason: Join this channel to get access to members-only content like this video, and other exclusive perks.
+
+If you are sure that the described cause is not responsible for this error and that a transcript should be retrievable, please create an issue at https://github.com/jdepoix/youtube-transcript-api/issues. Please add which version of youtube_transcript_api you are using and provide the information needed to replicate the error. Also make sure that there are no open issues which already describe your problem!
+[!] No transcript for this video or disabled.
+ERROR: [youtube] pvL3rvbuLkc: Join this channel to get access to members-only content like this video, and other exclusive perks.
+[!] Error downloading video https://www.youtube.com/watch?v=pvL3rvbuLkc: ERROR: [youtube] pvL3rvbuLkc: Join this channel to get access to members-only content like this video, and other exclusive perks.
+[!] Video not saved properly or error.
+[DB] Inserted row id=529
+
+[INFO] Processing: https://www.youtube.com/watch?v=-OlTXE65DKc
+[!] Error retrieving transcript for -OlTXE65DKc: 
+Could not retrieve a transcript for the video https://www.youtube.com/watch?v=-OlTXE65DKc! This is most likely caused by:
+
+The video is unplayable for the following reason: Join this channel to get access to members-only content like this video, and other exclusive perks.
+
+If you are sure that the described cause is not responsible for this error and that a transcript should be retrievable, please create an issue at https://github.com/jdepoix/youtube-transcript-api/issues. Please add which version of youtube_transcript_api you are using and provide the information needed to replicate the error. Also make sure that there are no open issues which already describe your problem!
+[!] No transcript for this video or disabled.
+ERROR: [youtube] -OlTXE65DKc: Join this channel to get access to members-only content like this video, and other exclusive perks.
+[!] Error downloading video https://www.youtube.com/watch?v=-OlTXE65DKc: ERROR: [youtube] -OlTXE65DKc: Join this channel to get access to members-only content like this video, and other exclusive perks.
+[!] Video not saved properly or error.
+[DB] Inserted row id=530
+
+[INFO] Processing: https://www.youtube.com/watch?v=N2UguYUecvQ
+[+] Transcript saved to /Users/tasteless/youtube-downloads/20250410/NahamCon2022EU_I_Hope_This_Sticks_Analyzing_ClipboardEvent_Listeners_for_XSS_by_spaceraccoon-NahamSec.txt
+[+] Video downloaded: /Users/tasteless/youtube-downloads/20250410/NahamCon2022EU_I_Hope_This_Sticks_Analyzing_ClipboardEvent_Listeners_for_XSS_by_spaceraccoon-NahamSec.mp4
+[DB] Inserted row id=531
+
+[INFO] Processing: https://www.youtube.com/watch?v=uKVX0333vYA
+[!] Error retrieving transcript for uKVX0333vYA: 
+Could not retrieve a transcript for the video https://www.youtube.com/watch?v=uKVX0333vYA! This is most likely caused by:
+
+The video is unplayable for the following reason: This video is available to this channel's members on level: Nahomies (or any higher level). Join this channel to get access to members-only content and other exclusive perks.
+
+If you are sure that the described cause is not responsible for this error and that a transcript should be retrievable, please create an issue at https://github.com/jdepoix/youtube-transcript-api/issues. Please add which version of youtube_transcript_api you are using and provide the information needed to replicate the error. Also make sure that there are no open issues which already describe your problem!
+[!] No transcript for this video or disabled.
+ERROR: [youtube] uKVX0333vYA: This video is available to this channel's members on level: Nahomies (or any higher level). Join this channel to get access to members-only content and other exclusive perks.
+[!] Error downloading video https://www.youtube.com/watch?v=uKVX0333vYA: ERROR: [youtube] uKVX0333vYA: This video is available to this channel's members on level: Nahomies (or any higher level). Join this channel to get access to members-only content and other exclusive perks.
+[!] Video not saved properly or error.
+[DB] Inserted row id=532
+
+[INFO] Processing: https://www.youtube.com/watch?v=4ZsTKvfP1g0
+[+] Transcript saved to /Users/tasteless/youtube-downloads/20250410/NahamCon2022EU_RTFR_Read_The_Bleeping_RFC_by_securinti-NahamSec.txt
+[+] Video downloaded: /Users/tasteless/youtube-downloads/20250410/NahamCon2022EU_RTFR_Read_The_Bleeping_RFC_by_securinti-NahamSec.mp4
+[DB] Inserted row id=533
+
+[INFO] Processing: https://www.youtube.com/watch?v=8YkMu32Hcho
+[!] Error retrieving transcript for 8YkMu32Hcho: 
+Could not retrieve a transcript for the video https://www.youtube.com/watch?v=8YkMu32Hcho! This is most likely caused by:
+
+The video is unplayable for the following reason: This video is available to this channel's members on level: Nahomies (or any higher level). Join this channel to get access to members-only content and other exclusive perks.
+
+If you are sure that the described cause is not responsible for this error and that a transcript should be retrievable, please create an issue at https://github.com/jdepoix/youtube-transcript-api/issues. Please add which version of youtube_transcript_api you are using and provide the information needed to replicate the error. Also make sure that there are no open issues which already describe your problem!
+[!] No transcript for this video or disabled.
+ERROR: [youtube] 8YkMu32Hcho: This video is available to this channel's members on level: Nahomies (or any higher level). Join this channel to get access to members-only content and other exclusive perks.
+[!] Error downloading video https://www.youtube.com/watch?v=8YkMu32Hcho: ERROR: [youtube] 8YkMu32Hcho: This video is available to this channel's members on level: Nahomies (or any higher level). Join this channel to get access to members-only content and other exclusive perks.
+[!] Video not saved properly or error.
+[DB] Inserted row id=534
+```
