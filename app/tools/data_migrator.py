@@ -72,13 +72,17 @@ def migrate_folders(dry_run=False):
             if file_path.suffix not in ['.mp4', '.txt']:
                 continue
 
+            if file_path.name.endswith(".part"):
+                print(f"[SKIP] Incomplete file (still downloading): {file_path.name}")
+                continue
+
             if file_already_migrated(file_path, conn):
                 print(f"[SKIP] Already migrated: {file_path.name}")
                 continue
 
             print(f"[INFO] Migrating: {file_path.name}")
             try:
-                file_size = file_path.stat().st_size  # <- moved here before rsync deletes the file
+                file_size = file_path.stat().st_size
                 file_type = "video" if file_path.suffix == ".mp4" else "transcript"
 
                 dest_path = rsync_file(file_path, DEST_DIR, dry_run=dry_run)
