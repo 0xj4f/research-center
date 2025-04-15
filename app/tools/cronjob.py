@@ -6,7 +6,7 @@ from datetime import datetime
 from pathlib import Path
 
 SOURCE_DIR = Path.home() / "youtube-downloads"
-SIZE_LIMIT_GB = 30
+SIZE_LIMIT_GB = 10
 MIGRATOR_SCRIPT = Path(__file__).parent / "data_migrator.py"
 LOG_FILE = SOURCE_DIR / "cronjob_migration.log"
 
@@ -22,20 +22,30 @@ def get_folder_size_gb(path: Path) -> float:
                 continue  # file was likely moved during scanning
     return total / (1024 ** 3)
 
+
+def write_log(log_msg):
+    print(log_msg)
+    with open(LOG_FILE, "a") as f:
+        f.write(log_msg + "\n")
+
 def main():
     current_size = get_folder_size_gb(SOURCE_DIR)
     now = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     readable_path = str(SOURCE_DIR)
 
     if current_size >= SIZE_LIMIT_GB:
-        log_msg = f"[{now}] Triggering migration. Folder '{readable_path}' size: {current_size:.2f} GB"
+        log_msg = f"[{now}] Triggering migration. Folder '{readable_path}' size: {current_size:.2f} GB, Limit Size {SIZE_LIMIT_GB}"
+        write_log(log_msg=log_msg)
         subprocess.run(["python3", str(MIGRATOR_SCRIPT)], check=True)
+
+        # Finished log
+        now = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+        current_size = get_folder_size_gb(SOURCE_DIR)
+        log_msg = f"[{now}] Finished Data Migration '{readable_path}' size: {current_size:.2f} GB"
+        write_log(log_msg=log_msg)
     else:
         log_msg = f"[{now}] No action. Folder '{readable_path}' size: {current_size:.2f} GB"
-
-    with open(LOG_FILE, "a") as f:
-        f.write(log_msg + "\n")
-    print(log_msg)
+        write_log(log_msg=log_msg)
 
 if __name__ == "__main__":
     main()
