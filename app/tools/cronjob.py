@@ -34,14 +34,14 @@ def main():
     readable_path = str(SOURCE_DIR)
 
     if current_size >= SIZE_LIMIT_GB:
-        log_msg = f"[{now}] Triggering migration. Folder '{readable_path}' size: {current_size:.2f} GB, Limit Size {SIZE_LIMIT_GB}"
+        log_msg = f"[{now}] [+] Triggering migration. Folder '{readable_path}' size: {current_size:.2f} GB, Limit Size {SIZE_LIMIT_GB}"
         write_log(log_msg=log_msg)
         subprocess.run(["python3", str(MIGRATOR_SCRIPT)], check=True)
 
         # Finished log
         now = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
         current_size = get_folder_size_gb(SOURCE_DIR)
-        log_msg = f"[{now}] Finished Data Migration '{readable_path}' size: {current_size:.2f} GB"
+        log_msg = f"[{now}] [+] Finished Data Migration '{readable_path}' size: {current_size:.2f} GB"
         write_log(log_msg=log_msg)
     else:
         log_msg = f"[{now}] No action. Folder '{readable_path}' size: {current_size:.2f} GB"
